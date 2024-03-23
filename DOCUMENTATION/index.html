@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PHP Twitcher Documentation</title>
+    <link href="assets/docs.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="sidebar">
+        <img src="assets/twitcher-logo-dark.png" alt="" height="50" />
+
+        <ul>
+          <li>
+            <a href="#intro">Introduction</a>
+          </li>
+          <li>
+            <a href="#requirements">Requirements</a>
+          </li>
+          <li>
+            <a href="#upload">Uploading the Script</a>
+          </li>
+          <li>
+            <a href="#docroot">Setting Document Root</a>
+          </li>
+          <li>
+            <a href="#database">Database & Setup</a>
+          </li>
+          <li>
+            <a href="#admin">Admin Panel</a>
+          </li>
+          <li>
+            <a href="#config">General Configuration</a>
+          </li>
+          <li>
+            <a href="#livestream">Live Streaming (Nginx-RTMP)</a>
+          </li>
+          <li>
+            <a href="#livechat">Live Chat (Pusher)</a>
+          </li>
+          <li>
+            <a href="#payment">Payment Gateways</a>
+          </li>
+          <li>
+            <a href="#tokens">Token Packs</a>
+          </li>
+          <li>
+            <a href="#mail">Mail Server</a>
+          </li>
+          <li>
+            <a href="#translate">Translating App</a>
+          </li>
+          <li>
+            <a href="#video">Video Guide</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <h2>PHP Twitcher Documentation</h2>
+
+        <h3 id="intro">1. Introduction</h3>
+
+        <div class="card">
+          Thank you for purchasing my script. If you have any questions that are
+          beyond the scope of this help file, please feel free to email via my
+          user page contact form at
+          <a href="https://codecanyon.net/user/crivion" target="_blank"
+            >https://codecanyon.net/user/crivion</a
+          >. Thanks so much!
+        </div>
+
+        <h3 id="requirements">2. Server Requirements</h3>
+
+        
+
+        <div class="card">
+          <p class="my-2">
+            This professional live streaming platform requires a <strong>VPS or Dedicated server</strong> with <strong>Nginx with RTMP Support (libnginx-mod-rtmp & ffmpeg)</strong>
+          </p>
+
+          <ul>
+            <li>Nginx web server</li>
+            <li class="mt-10">MySQL 8+ Web Server</li>
+            <li class="mt-10">PHP version 8.0.26 or higher</li>
+            <li class="mt-10">
+              PHP Extensions: BCMath, Ctype, Fileinfo, JSON, Mbstring, OpenSSL,
+              PDO, Tokenizer, XML, cURL, exif, GD
+            </li>
+            <li class="mt-10">SSL (Https://) Certificate (Letsencrypt Certbot)</li>
+          </ul>
+        </div>
+
+        <h3 id="requirements">3. Uploading the Script Files</h3>
+
+        <div class="card">
+          <p>
+            Connect to your server using your preferred way (SSH / a control panel file manager / FTP / etc.) and upload the zip file
+            <strong>"php-twitcher.zip"</strong> to your domain. Unzip the file directly on the server on your domain path.
+          </p>
+        </div>
+
+        <h3 id="docroot">
+          4. Setting the Document Root
+          <span class="important">VERY IMPORTANT</span>
+        </h3>
+
+        <div class="card">
+          <p>
+            You need to configure your web server document root to point to the
+            <strong>/public</strong> directory.
+          </p>
+
+          <p>
+            You need to Add Header Access Control to your nginx vhost file<br/>
+            <strong>add_header Access-Control-Allow-Origin "*";</strong>
+          </p>
+
+          <p>
+            <h4>Nginx Vhost Example</h4>
+            <img src="assets/nginx.png" alt="" width="640" />
+          </p>
+          
+        </div>
+
+
+        <h3 id="database">5. Database & Setup</h3>
+
+        <div class="card">
+
+            <h4>Create a Database & User</h4>
+
+            <p>Create a MySQL database and ASSIGN a MySQL User to it. You can do that via CLI or your server Control panel (if you have any).</p>
+
+          
+
+            <h4>Setup - Run the Script Installer</h4>
+
+            <p>
+                Point to <strong>your-domain.tld/install</strong> to run the installation.
+            </p>
+
+            <div class="flex">
+                <img src="assets/install-1.png" alt="" width="33%"/>
+                <img src="assets/install-2.png" alt="" width="33%"/>
+                <img src="assets/install-3.png" alt="" width="33%"/>
+            </div>
+        </div>
+
+
+        <h3 id="admin">6. Admin Panel</h3>
+        <div class="card">
+        <p>It's very important to set your own admin panel credentials after the installation.
+            <br/>
+            For this, simply go to <strong>your-site.tld/admin/login</strong> and then point to <strong>Admin Logins</strong> section.
+        </p>
+
+        <img src="assets/admin.png" alt="" width="640"/>
+
+        </div>
+
+        <h3 id="config">7. General Configuration</h3>
+        <div class="card">
+        <p>
+            Now it's time to do some general setup for your brand new site like: title, logo,  etc.
+            <br/>
+            For this, simply go to <strong>your-site.tld/admin/login</strong> and then point to <strong>App Configuration</strong> section.
+        </p>
+
+        <img src="assets/config.png" alt="" width="640"/>
+
+        </div>
+
+        <h3 id="livestream">8. Live Streaming - Nginx-RTMP Setup  <span class="important">VERY IMPORTANT</span></h3>
+        <div class="card">
+        <p>
+            The <strong>core functionality</strong> of PHP Twitcher is the <strong>Live Streaming</strong> feature.
+            <br/>
+            Make sure you have libnginx-mod-rtmp & ffmpeg
+            <pre>
+apt update
+apt install build-essential libpcre3 libpcre3-dev libssl-dev nginx-full libnginx-mod-rtmp ffmpeg
+            </pre>
+        </p>
+
+        <h3>Configuring NGINX for RTMP Support</h3>
+        <p class="my-2">
+          Edit <strong>nginx.conf</strong> (usually located at /etc/nginx/nginx.conf) to add rtmp{..} block <strong>just after http{...} block closes</strong>
+        </p>
+        <img src="assets/nginx-rtmp.png" alt="" width="840" />
+
+        <h3>Copy code below and replace yourdomain.com with your actual domain/path</h3>
+        <pre>
+rtmp {
+  server {
+                listen 1935;
+                  chunk_size 4096;
+
+                  application live {
+                              live on;
+                              on_publish http://127.0.0.1:8888/streamer_auth;
+                              on_publish_done http://127.0.0.1:8888/streamer_auth;
+                              hls on;
+                              hls_path /var/www/yourdomain.com/public/livestreams;
+                              hls_fragment 3;
+                              hls_playlist_length 60;
+                              record off;
+                  }
+          }
+
+}         
+        </pre>
+
+
+        <h3>Set RTMP URL in the Admin Panel</h3>
+        <p class="my-2">
+          After configuring nginx for RTMP Support, 
+          your RTMP url should be in this format: <strong>rtmp://yourdomain.com/live</strong>
+        </p>
+        <img src="assets/streaming.png" alt="" width="840"/>
+
+       <h3>Last Step - Configure RTMP Authentication (Stream Keys)</h3>
+       <p class="my-2">
+        In order to allow your platform users to stream using OBS or similar software, you need to configure <strong>your vhost file authenticating users with stream keys</strong>
+        <br/><br/>
+        Open your <strong>vhost file for the domain</strong> (usually /etc/nginx/sites-available/yourdomain.conf) and <strong>add the following block</strong> at the bottom - replace <strong>yourdomain.com</strong> with your <strong>actual domain</strong>
+       </p>
+
+       <pre>
+# Configure RTMP Authentication
+server {
+  listen 8888;
+  location /streamer_auth {
+                  proxy_intercept_errors on;
+                  proxy_set_header X-Real-IP $remote_addr;
+                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                  proxy_pass https://yourdomain.com/api/streaming/validate-key;
+  }
+}
+       </pre>
+
+
+        <img src="assets/stream-keys.png" alt="" width="840" />
+
+        </div>
+
+
+        <h3 id="livechat">9. Live Chat - Pusher Setup  <span class="important">VERY IMPORTANT</span></h3>
+        <div class="card">
+        <p>
+            Setting up the <strong>live chat </strong> functionality.
+        </p>
+
+        <h3>Obtaining the Pusher Keys</h3>
+
+        <p>
+            Go to your account on <a href="https://dashboard.pusher.com/channels" target="_blank">https://dashboard.pusher.com/channels</a> -> click on <strong>Create App</strong>
+        </p>
+
+        <img src="assets/pusher-app.png" alt="" width="640" />
+
+        <p>Then from your newly created app dashboard, point to keys</p>
+
+        <img src="assets/pusher-keys.png" alt="" width="640" />
+
+        <p>Finally, point <strong>to admin panel</strong> and add the keys.</p>
+
+        <img src="assets/pusher-admin.png" alt="" width="640" />
+
+        </div>
+
+
+        <h3 id="payment">10. Payment Gateways</h3>
+        <div class="card">
+        <p>PHP Twitcher enables you to take payments via 4 gateways: stripe, bank transfer, paypal and ccbill.
+        </p>
+
+        <h3>PayPal Payments</h3>
+        <p>
+            Simply add your paypal email and set PayPal payments to enabled.
+        </p>
+
+        <h3>Bank Transfer Payments</h3>
+        <p>
+            Simply add your bank account details & instructions for the user to pay you.
+        </p>
+
+        <h3>Stripe Payments</h3>
+
+        <p>
+            Go to your Stripe account -> Developers section get your API keys
+        </p>
+
+        <img src="assets/stripe-my-account.png" alt="" width="640"/>
+
+        <p>
+            Then add your details in Admin -> App Configuration -> Payment Gateways
+        </p>
+
+        <img src="assets/stripe-admin.png" alt="" width="640"/>
+
+
+        <h3>CCBill Payments</h3>
+
+        <p>
+            You need DYNAMIC PRICING enabled in your CCBill Account - Get in touch with their live support <a href="https://support.ccbill.com/">https://support.ccbill.com</a>
+            <br/>
+            Login to your CCBill account. <a href="https://admin.ccbill.com/megamenus/ccbillHome.html">https://admin.ccbill.com/megamenus/ccbillHome.html</a>
+            <br/>
+            Then go to <a href="https://admin.ccbill.com/megamenus/ccbillHome.html#FlexFormsSystems/FlexFormsPaymentLinks(flexFormsNoPromote)">FlexForms Systems</a> and add new flex form
+
+            <img src="assets/ccbill-create-flex-form.png" alt="" width="640" class="mt-10"/>
+            <img src="assets/subaccount.png" alt="" width="640" />
+
+            <p>Your CCBill WebHooks URL is <strong>https://your-site.tld/<span class="text-red">api/ccbill/webhooks</span></strong></p>
+            <img src="assets/ccbill-webhooks.png" alt="" width="640" />
+            <img src="assets/dont-collect-user.png" alt="" width="640" />
+        </p>
+
+        </div>
+
+        <h3 id="tokens">11. Token Packs</h3>
+        <div class="card">
+        <p>
+            <strong>Token Pacakages</strong> are the way this platform earns you money.
+            <br/>
+            Your profit will come from the difference of the <strong>streamer token value</strong> and the <strong>amount you sell tokens</strong> for to regular users.<br/>
+            <br/>
+            <strong>Example:</strong>
+            <ul>
+                <li>User buys 100 tokens for $90</li>
+                <li>User tips the 100 tokens to a streamer</li>
+                <li>You set the token value for streamer to $0.75/token</li>
+                <li>When streamer withdraws the 100 tokens, it'll get paid $75</li>
+                <li>Your profit will be difference from token sale to streamer withdrawal amount: $90-$75=$15</li>
+            </ul>
+        </p>
+
+        <img src="assets/tok-packs.png" alt="" width="640" />
+        <img src="assets/tok-val.png" alt="" width="640" />
+    </div>
+
+    
+
+        <h3 id="mail">12. Mail Server (SMTP)</h3>
+        <div class="card">
+        <p>
+            It is crucial to setup your SMTP mail server & test the configuration prior to launching your site to the public.
+            There are a lot of email notifications like <strong>contact form, streamer identity verification, payout requests, etc.</strong> that rely on your mail server to notify the respective recipients like admin, users or streamers.
+            <br/>
+            The log driver is used for debugging only and the emails will appear in storage/logs/laravel.log folder.
+        </p>
+
+        <img src="assets/mail.png" alt="" width="640" />
+
+      </div>
+
+      <h3 id="translate">Translating the App</h3>
+        <div class="card">
+        <p>
+        If you wish to translate the app into your own language it is in fact very easy and translation ready.
+        <br/>
+        Simply open <strong>lang/en.json</strong> & <strong>lang/en/* files</strong> and your language strings to the right.
+        </p>
+
+        <img src="assets/translate.png" alt="" width="640" />
+
+      </div>
+
+      <h3 id="video">Video Guide</h3>
+
+      <div class="card">
+        <p>If you are more comfortable with a video guide, here's how we setup our live demo from scratch including VPS installation & configuration.</p>
+        
+        <p>
+        <a href="https://www.youtube.com/watch?v=zgwCdzysazg" class="underline" target="_blank">https://www.youtube.com/watch?v=zgwCdzysazg</a>
+      </p>
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/zgwCdzysazg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+
+      
+    </div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+{
+    "name": "crivion/reladmini",
+    "description": "Reladmini stands for React Laravel Admin (via InertiaJS)",
+    "keywords": [
+        "crivion",
+        "reladmini"
+    ],
+    "homepage": "https://github.com/crivion/reladmini",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alex Crivion",
+            "email": "crivion@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "illuminate/console": "^9.21",
+        "illuminate/support": "^9.21"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.3",
+        "phpunit/phpunit": "^9.0",
+        "inertiajs/inertia-laravel": "^0.6.4",
+        "tightenco/ziggy": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Crivion\\Reladmini\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Crivion\\Reladmini\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Crivion\\Reladmini\\ReladminiServiceProvider"
+            ],
+            "aliases": {
+                "Reladmini": "Crivion\\Reladmini\\ReladminiFacade"
+            }
+        }
+    }
+}

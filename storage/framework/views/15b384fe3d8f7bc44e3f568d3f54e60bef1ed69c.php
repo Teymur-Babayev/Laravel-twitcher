@@ -1,0 +1,1 @@
+It works!<?php /**PATH /Users/crivion/Sites/twitcher/resources/views/emails/test-email.blade.php ENDPATH**/ ?>

@@ -1,0 +1,9 @@
+Hi there,
+
+For upgrading simply upload ONLY the folder /upgrader to your hosting.
+
+After that, simply go to your-site.com/upgrader/
+
+That's it, easy and convenient!
+
+Thank you!

@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    font-family: Nunito, ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+        "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol", "Noto Color Emoji";
+}
+.text-dark-purple {
+    color: #474161;
+}
+.homepage-header-bg {
+    position: relative;
+    margin: 50px 0 0 0;
+    background-image: url("/images/homepage-header-bg.png");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 800px;
+}
+.no-bg-image {
+    background-image: none;
+    border: 3px solid red;
+}
+.homepage-text-container {
+    padding: 20px 0 20px 0;
+}
+.bg-light-violet {
+    background-color: #e7eaff;
+}
+.border-light-violet {
+    border-color: #e0e3fc;
+}
+.heading-gradient {
+    background: -webkit-linear-gradient(95deg, #4338ca 15%, #312e81 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.coverPic {
+    position: relative;
+    margin: 0 auto;
+    padding: 30px;
+    width: 100%;
+    height: 280px;
+    background-image: url("/coverPics/default-cover-pic.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.static-page p {
+    padding: 10px 0 10px 0;
+}
+.static-page h1 {
+    font-size: 150%;
+}
+.static-page h2 {
+    font-size: 140%;
+}
+.static-page h3 {
+    font-size: 130%;
+}
